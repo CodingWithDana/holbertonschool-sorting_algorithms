@@ -10,5 +10,8 @@
 # Don't ignore dotfiles like .gitignore, .env, etc.
 !.*
 
+# Don't ignore files starting with q
+!q*
+
 # Ignore mac files
 *.DS_Store
