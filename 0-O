@@ -1,0 +1,7 @@
+/* Best case: array already sorted */
+O(n)
+/* Average case: reverse-sorted array, where every possible swap must happen */
+O(n^2)
+/* Worst case: random order, might have to do nearly the same number of swaps as */
+/* in the worst case */
+O(n^2)
