@@ -1,0 +1,14 @@
+# Ignore files that don't have a dot (no extension)
+*
+
+# Don't ignore folders
+!*/
+
+# Don't ignore files with extensions (have at least one dot not at the start)
+!*.* 
+
+# Don't ignore dotfiles like .gitignore, .env, etc.
+!.*
+
+# Ignore mac files
+*.DS_Store
