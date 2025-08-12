@@ -48,28 +48,20 @@ size_t partition(int *array, size_t low, size_t high, size_t size)
 	/* Iterate j from low to (high - 1) to compare each element to pivot */
 	j = low;
 	/* If current element is less than the pivot, swap it to the position i */
-	while (j < high)
+	for (j = low; j < high; j++)
 	{
-		/* If current element is smaller than pivot, swap it into position i */
 		if (array[j] < pivot_value)
 		{
 			if (i != j)
-			{
-				/* Swap array [i] and array [j], then print the array inside swap() for every swap */
 				swap(&array[i], &array[j], array, size);
-				/* Move i to the next position for potential smaller elements */
-				i++;
-			}
-		}
-		/* Move j to check the next element in the partition */
-		j++;
-	}
-	/* Always swap pivot into its correct sorted position */
-	swap(&array[i], &array[high], array, size);
-	/* Return the pivot's final position so recursion can split around it */
-	return (i);
+			i++;
+        }
+    }
+    if (i != high)
+        swap(&array[i], &array[high], array, size);
+    /* final pivot index */
+    return i;
 }
-
 /**
  * recursive_sort - uses partition() to place pivot
  * and then recurses on the two subarays
@@ -90,9 +82,10 @@ void recursive_sort(int *array, size_t low, size_t high, size_t size)
 		/* Partition the current range and get the pivot's final index */
 		pivot_index = partition(array, low, high, size);
 		/* Recursively sort the subarrays */
-		if (pivot_index > 0)
+		if (pivot_index > low)
 			recursive_sort(array, low, pivot_index - 1, size);
-		recursive_sort(array, pivot_index + 1, high, size);
+		if (pivot_index + 1 <= high)
+			recursive_sort(array, pivot_index + 1, high, size);
 	}
 	/* If low >= high, return nothing */
 	if (low >= high)
