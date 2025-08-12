@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stddef.h>
 /**
- * swap - swaps two integer elements in the array and then print the whole array
+ * swap - swaps two integer elements in the array and
+ *  then print the whole array
  * @a: pointer to the first element to swap
  * @b: pointer to the second element to swap
  * @array: the whole array
@@ -11,7 +12,7 @@
 void swap(int *a, int *b, int *array, size_t size)
 {
 	int temp_value;
-	
+
 	if (a != b && *a != *b)
 	{
 		/* Store the value at address in a temporary variable */
@@ -28,7 +29,7 @@ void swap(int *a, int *b, int *array, size_t size)
 /**
  * partition - partitions the subarray [low..high]
  * @array: pointer pointing to the subarray of integers
- * @low: starting index of the current subarray we're sorting 
+ * @low: starting index of the current subarray we're sorting
  * @high: ending index of that subarray
  * @size: number of elements in the subarray
  * Return: the final index position of the pivot
@@ -55,12 +56,12 @@ size_t partition(int *array, size_t low, size_t high, size_t size)
 			if (i != j)
 				swap(&array[i], &array[j], array, size);
 			i++;
-        }
-    }
-    if (i != high)
-        swap(&array[i], &array[high], array, size);
-    /* final pivot index */
-    return i;
+		}
+	}
+	if (i != high)
+		swap(&array[i], &array[high], array, size);
+	/* final pivot index */
+	return (i);
 }
 /**
  * recursive_sort - uses partition() to place pivot
@@ -87,14 +88,11 @@ void recursive_sort(int *array, size_t low, size_t high, size_t size)
 		if (pivot_index + 1 <= high)
 			recursive_sort(array, pivot_index + 1, high, size);
 	}
-	/* If low >= high, return nothing */
-	if (low >= high)
-	return;
 }
 
-/** 
+/**
  * quick_sort - main function to sort an array of integers in ascending
- * order using Quick sort with the Lomuto partition scheme 
+ * order using Quick sort with the Lomuto partition scheme
  * and pivot chosen as last element
  * @array: pointer pointing to the array of integers
  * @size: number of elements in the array
