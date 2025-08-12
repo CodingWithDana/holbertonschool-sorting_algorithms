@@ -11,15 +11,18 @@
 void swap(int *a, int *b, int *array, size_t size)
 {
 	int temp_value;
-
-	/* Store the value at address in a temporary variable */
-	temp_value = *a;
-	/* Copy the value at address b into the location pointed by a */
-	*a = *b;
-	/* Put the temporarily stored value into the location pointed by b */
-	*b = temp_value;
-	/* Print the array state after performing this swap */
-	print_array(array, size);
+	
+	if (a != b && *a != *b)
+	{
+		/* Store the value at address in a temporary variable */
+		temp_value = *a;
+		/* Copy the value at address b into the location pointed by a */
+		*a = *b;
+		/* Put the temporarily stored value into the location pointed by b */
+		*b = temp_value;
+		/* Print the array state after performing this swap */
+		print_array(array, size);
+	}
 }
 
 /**
@@ -50,10 +53,13 @@ size_t partition(int *array, size_t low, size_t high, size_t size)
 		/* If current element is smaller than pivot, swap it into position i */
 		if (array[j] < pivot_value)
 		{
-			/* Swap array [i] and array [j], then print the array inside swap() for every swap */
-			swap(&array[i], &array[j], array, size);
-			/* Move i to the next position for potential smaller elements */
-			i++;
+			if (i != j)
+			{
+				/* Swap array [i] and array [j], then print the array inside swap() for every swap */
+				swap(&array[i], &array[j], array, size);
+				/* Move i to the next position for potential smaller elements */
+				i++;
+			}
 		}
 		/* Move j to check the next element in the partition */
 		j++;
@@ -75,28 +81,18 @@ size_t partition(int *array, size_t low, size_t high, size_t size)
  */
 void recursive_sort(int *array, size_t low, size_t high, size_t size)
 {
+	size_t pivot_index;
+
 	/* Only sort when the partition has at least 2 elements */
 	/* is when low < high. If low >= high, the partition is size 0 or 1 */
 	if (low < high)
 	{
-		size_t pivot_index;
-
 		/* Partition the current range and get the pivot's final index */
 		pivot_index = partition(array, low, high, size);
-		/* Recursively sort the left subarray if it exists */
-		/* Only call recursion on the left side when pivot_index > low */
-		if (pivot_index > low)
-		{
-			/* left subarray is low ... (pivot_index - 1) */
+		/* Recursively sort the subarrays */
+		if (pivot_index > 0)
 			recursive_sort(array, low, pivot_index - 1, size);
-		}
-
-		/* Recursively sort the right subarray if it exists */
-		/* Only call recursion on the right subarray when (pivot_index + 1) <= high */
-		if (pivot_index + 1 <= high)
-		{
-			recursive_sort(array, pivot_index + 1, high, size);
-		}
+		recursive_sort(array, pivot_index + 1, high, size);
 	}
 	/* If low >= high, return nothing */
 	if (low >= high)
